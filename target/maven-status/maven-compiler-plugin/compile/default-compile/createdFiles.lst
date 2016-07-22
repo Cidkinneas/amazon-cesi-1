@@ -1,5 +1,8 @@
-amazon/api/pojo/Book.class
-amazon/api/dao/BookDAO.class
-amazon/api/controller/BookController.class
-amazon/api/dao/BookDAO$1.class
-amazon/api/Application.class
+amazon\api\controller\BookController.class
+amazon\api\dao\BookDAO$1.class
+amazon\api\dao\BookDAO.class
+amazon\api\dao\BookDAO$BOOKFIELD.class
+amazon\api\dao\AmazonDAO.class
+amazon\api\pojo\IModel.class
+amazon\api\pojo\Book.class
+amazon\api\Application.class
