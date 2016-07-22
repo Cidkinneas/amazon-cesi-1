@@ -39,10 +39,12 @@ public class BookController {
 			@RequestParam(value="date") Long date,
 			@RequestParam(value="asin") String asin,
 			@RequestParam(value="publisher") String publisher,
-			@RequestParam(value="pages") int pages
+			@RequestParam(value="pages") int pages,
+			@RequestParam(value="qty", defaultValue="0") int qty
+			
 			) {
 		
-		BookDAO.getInstance().addBook(title, author, new Date(date), asin, publisher, pages);
+		BookDAO.getInstance().addBook(title, author, new Date(date), asin, publisher, pages, qty);
 	}
 	
 	@RequestMapping("/book/delete")
