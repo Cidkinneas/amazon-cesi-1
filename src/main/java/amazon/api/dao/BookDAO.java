@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import amazon.api.dao.BookDAO.BOOKFIELD;
 import amazon.api.pojo.Book;
 
 public class BookDAO extends AmazonDAO<Book> {
@@ -79,6 +80,21 @@ public class BookDAO extends AmazonDAO<Book> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void addBook(String title, String author, 
+			Date publicationDate, String asin, String publisher, int pages) {
+		super.addItem(new Book(title, author, publicationDate, asin, publisher, pages));
+		
+	}
+
+	public boolean deleteByField(BOOKFIELD field, String value) {
+		try {
+			return super.deleteByField(field.toString(), value);
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
