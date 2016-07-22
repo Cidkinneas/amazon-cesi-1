@@ -10,36 +10,6 @@ import junit.framework.TestCase;
 
 public class BookAPITest extends TestCase {
 
-	public void testDeleteBook(){
-		Boolean ok = BookDAO.getInstance().deleteByField(BOOKFIELD.asin, "ISBN123456");
-		
-		assertTrue(ok);
-		
-		assertNull(BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "ISBN123456"));
-		
-	}
-	
-	public void testAddBook() {
-		BookDAO.getInstance().addBook(
-				"Super Livre", 
-				"Toto", 
-				new Date(2016,10,10), 
-				"ISBN123456", 
-				"Tti", 
-				40);
-		
-		Book expd = new Book("Super Livre", 
-				"Toto", 
-				new Date(2016,10,10), 
-				"ISBN123456", 
-				"Tti", 
-				40);
-		assertEquals(BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "ISBN123456"), expd);
-		
-	}
-	
-	
-	
 	public void testAllBooks(){
 		
 		List<Book> expected = BookDAO.getInstance().fecthAll();
@@ -89,5 +59,51 @@ public class BookAPITest extends TestCase {
 		
 		assertEquals(expected, result);
 		assertEquals(null,  BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "adawdawd"));
+	}
+	
+	public void testBuyProcess() {
+		BookDAO.getInstance().addBook(
+				"Super Livre", 
+				"Toto", 
+				new Date(2016,10,10), 
+				"dsqdsqdsq", 
+				"Tti", 
+				40,
+				30);
+
+		Book b = BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "dsqdsqdsq");
+		assertEquals(30, b.getQuantity());
+		
+		Boolean result = BookDAO.getInstance().buyBook("dsqdsqdsq");
+				
+		assertTrue(result);
+	}
+	
+	public void testDeleteBook(){
+		Boolean ok = BookDAO.getInstance().deleteByField(BOOKFIELD.asin, "ISBN123456");
+		
+		assertTrue(ok);
+		
+		assertNull(BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "ISBN123456"));
+		
+	}
+	
+	public void testAddBook() {
+		BookDAO.getInstance().addBook(
+				"Super Livre", 
+				"Toto", 
+				new Date(2016,10,10), 
+				"ISBN123456", 
+				"Tti", 
+				40);
+		
+		Book expd = new Book("Super Livre", 
+				"Toto", 
+				new Date(2016,10,10), 
+				"ISBN123456", 
+				"Tti", 
+				40);
+		assertEquals(BookDAO.getInstance().fetchOneByField(BOOKFIELD.asin, "ISBN123456"), expd);
+		
 	}
 }

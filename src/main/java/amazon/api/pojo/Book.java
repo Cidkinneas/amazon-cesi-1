@@ -10,6 +10,7 @@ public class Book implements IModel{
 	private String asin;
 	private String publisher;
 	private int pages;
+	private int quantity;
 
 	public Book(String title, String author, 
 			Date publicationDate, String asin, String publisher, int pages) {
@@ -23,6 +24,28 @@ public class Book implements IModel{
 	}
 	
 	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+
+	public Book(String title, String author, Date publicationDate, String asin, String publisher, int pages,
+			int quantity) {
+		
+		this(title, author, publicationDate, asin, publisher, pages);
+		
+		this.quantity= quantity;
+	}
+
+
 
 	@Override
 	public int hashCode() {

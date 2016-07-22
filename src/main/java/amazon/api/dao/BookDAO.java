@@ -46,7 +46,7 @@ public class BookDAO extends AmazonDAO<Book> {
 	}};
 	
 	public enum BOOKFIELD{
-		title, author, publicationDate, asin, publisher, pages;
+		title, author, publicationDate, asin, publisher, pages, quantity;
 	}
 
 	
@@ -87,6 +87,11 @@ public class BookDAO extends AmazonDAO<Book> {
 		super.addItem(new Book(title, author, publicationDate, asin, publisher, pages));
 		
 	}
+	
+	public void addBook(String title, String author, 
+			Date publicationDate, String asin, String publisher, int pages, int quantity) {
+		super.addItem(new Book(title, author, publicationDate, asin, publisher, pages, quantity));
+	}
 
 	public boolean deleteByField(BOOKFIELD field, String value) {
 		try {
@@ -95,6 +100,19 @@ public class BookDAO extends AmazonDAO<Book> {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public Boolean buyBook(String bookId) {
+		Book book = this.fetchOneByField(BOOKFIELD.asin, bookId);
+		
+		if(book == null) return false;
+		
+		if(book.getQuantity() == 0) return false;
+		
+		book.setQuantity(book.getQuantity() - 1);
+		
+		return true;
+		
 	}
 
 }

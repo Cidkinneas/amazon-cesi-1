@@ -23,7 +23,7 @@ public class BookController {
 		Book b = BookDAO.getInstance().fetchOneByField(BookDAO.BOOKFIELD.asin, id);
 		
 		System.err.println(b);
-		//localhost:8080/book?id=B00KHTCDC2
+
 		return b;
 	}
 	
@@ -52,5 +52,12 @@ public class BookController {
 		
 		BookDAO.getInstance().deleteByField(BOOKFIELD.asin, id);
 	}
-
+	
+	@RequestMapping("/book/buy")
+	public void buy(
+			@RequestParam(value="id") String id
+			) {
+		
+		BookDAO.getInstance().buyBook(id);
+	}
 }
